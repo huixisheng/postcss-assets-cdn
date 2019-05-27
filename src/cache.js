@@ -21,7 +21,7 @@ export default class Cache {
 
     readCache() {
         const result = {};
-        if (fs.existsSync(this.cache)) { 
+        if (fs.existsSync(this.cache)) {
             const content = fs.readFileSync(this.cache, {
                 encoding: 'utf-8'
             });
@@ -42,7 +42,6 @@ export default class Cache {
         } else if (typeof params === 'object' && params !== null) {
             content = JSON.stringify(params, null, 4);
         }
-        console.log(this.cache);
         fs.writeFileSync(this.cache, content);
     }
 

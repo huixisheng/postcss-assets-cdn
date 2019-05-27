@@ -16,12 +16,13 @@ export default class CdnManager {
             if (this.adapter === 'oss') {
                 this.ossUpload(key, uploadFile)
                     .then((res) => {
+                        console.log('uploadAdapter success');
                         resolve(res);
-                    })
+                    }
                     .catch((error) => {
                         reject(error);
                     });
-            }    
+            }
         });
     }
 
@@ -34,13 +35,13 @@ export default class CdnManager {
                         resolve(res);
                     })
                     .catch(error => {
-                        console.log(error);
+                        console.error(error);
                         reject(error);
                     });
             } catch (error) {
                 reject(error);
             }
-        })
-        
+        });
+
     }
 }

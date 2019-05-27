@@ -6,7 +6,6 @@ import Cache from './cache';
 import { getEtagSync } from './libs/index';
 
 function getFullPath(str, relativeFile) {
-    console.log(str, relativeFile);
     if (str.indexOf('/') === 0) {
         return path.join(process.cwd(), str);
     }
@@ -18,6 +17,7 @@ module.exports = postcss.plugin('postcss-assets-cdn', opts => {
     let uploadListPromise = [];
     let cdnManagerInstance = new CdnManager('oss', opts.ossConfig);
     const cache = new Cache({ cache: path.join(process.cwd(), opts.cache) });
+    const assetsDir = opts.assetsDir;
 
     return function (root, result) {
         root.walkDecls(/background/, decl => {
@@ -28,13 +28,17 @@ module.exports = postcss.plugin('postcss-assets-cdn', opts => {
                 }
                 const file = getFullPath(s1, root.source.input.file);
                 // const hash = md5File.sync(file, match);
-                const hash = getEtagSync(file);
-                console.log('hash', hash);
+                const division = assetsDir ? '/' : '';
+                const hash = assetsDir + division + getEtagSync(file);
+                const assetsUrl = [opts.baseUrl || '', hash].join('/');
+
                 if (!cache.hasCache(hash)) {
                     uploadListPromise.push(
                         cdnManagerInstance.upload(hash, file)
                             .then(() => {
-                                cache.set(hash, true);
+                                cache.set(hash, assetsUrl);
+                            }).catch((error) => {
+                                console.log(error);
                             })
                     );
                 }
@@ -44,7 +48,7 @@ module.exports = postcss.plugin('postcss-assets-cdn', opts => {
                 //         uploadListPromise.push(cdnManagerInstance.upload(etag, file));
                 //         decl.value = decl.value.replace(match, [opts.baseUrl || '', etag].join('/'));
                 //     });
-                return 'url(' + [opts.baseUrl || '', hash].join('/') + ')';
+                return 'url(' + assetsUrl + ')';
             });
         });
         // console.log(uploadListPromise);
