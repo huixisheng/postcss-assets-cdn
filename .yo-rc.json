@@ -1,0 +1,17 @@
+{
+  "generator-postcss-plugin": {
+    "pluginName": "postcss-assets-cdn",
+    "promptValues": {
+      "author": "huixisheng",
+      "email": "469184346@qq.com"
+    },
+    "pluginDescription": "postcss-assets-cdn",
+    "author": "huixisheng",
+    "email": "469184346@qq.com",
+    "authorUrl": "https://github.com/huixisheng/postcss-assets-cdn",
+    "license": "MIT",
+    "licenseOwner": "huixisheng",
+    "licenseProgram": "postcss-assets-cdn",
+    "licenseYear": 2019
+  }
+}

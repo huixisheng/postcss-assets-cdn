@@ -1,0 +1,10 @@
+{
+  "extends": "eslint-config-postcss",
+  "root": true,
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017
+  }
+}

@@ -1,0 +1,17 @@
+.a {
+    display: block;
+    background: url('/assets/alipay.png')
+}
+
+.a1 {
+    display: block;
+    background: url( '/assets/alipay.png' )
+}
+
+.b {
+    background: url(../../assets/alipay.png)
+}
+
+.c {
+    background: url(https://huixisheng.github.io/image/Fg0s0GU_xDPd2rOgAYYikJDTiEhL)
+}
