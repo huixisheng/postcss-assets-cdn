@@ -29,14 +29,18 @@ module.exports = postcss.plugin('postcss-assets-cdn', opts => {
                 const file = getFullPath(s1, root.source.input.file);
                 // const hash = md5File.sync(file, match);
                 const division = assetsDir ? '/' : '';
-                const hash = assetsDir + division + getEtagSync(file);
+                const etag = getEtagSync(file);
+                const hash = assetsDir + division + etag;
                 const assetsUrl = [opts.baseUrl || '', hash].join('/');
 
                 if (!cache.hasCache(hash)) {
                     uploadListPromise.push(
                         cdnManagerInstance.upload(hash, file)
                             .then(() => {
-                                cache.set(hash, assetsUrl);
+                                cache.set(etag, {
+                                    url: assetsUrl,
+                                    file
+                                });
                             }).catch((error) => {
                                 console.log(error);
                             })

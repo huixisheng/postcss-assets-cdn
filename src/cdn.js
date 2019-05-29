@@ -18,7 +18,7 @@ export default class CdnManager {
                     .then((res) => {
                         console.log('uploadAdapter success');
                         resolve(res);
-                    }
+                    })
                     .catch((error) => {
                         reject(error);
                     });
