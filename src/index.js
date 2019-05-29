@@ -23,7 +23,7 @@ module.exports = postcss.plugin('postcss-assets-cdn', opts => {
         root.walkDecls(/background/, decl => {
             // https://regex101.com/r/kU7cC9/7
             decl.value = decl.value.replace(/url\s*\(\s*[\"\']?(.*?)[\"\']?\s*\)/, (match, s1) => {
-                if (s1.indexOf('http') == 0) {
+                if (s1.indexOf('http') == 0 || s1.indexOf('data:image') == 0) {
                     return 'url(' + s1 + ')';
                 }
                 const file = getFullPath(s1, root.source.input.file);
