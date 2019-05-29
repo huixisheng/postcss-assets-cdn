@@ -33,13 +33,13 @@ module.exports = postcss.plugin('postcss-assets-cdn', opts => {
                 const hash = assetsDir + division + etag;
                 const assetsUrl = [opts.baseUrl || '', hash].join('/');
 
-                if (!cache.hasCache(hash)) {
+                if (!cache.hasCache(etag)) {
                     uploadListPromise.push(
                         cdnManagerInstance.upload(hash, file)
                             .then(() => {
                                 cache.set(etag, {
                                     url: assetsUrl,
-                                    file
+                                    file: file.replace(process.cwd(), '')
                                 });
                             }).catch((error) => {
                                 console.log(error);
