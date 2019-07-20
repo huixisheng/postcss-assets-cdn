@@ -46,7 +46,7 @@
     "release:minor": "npm test && npm run build && npm version minor",
     "release:major": "npm test && npm run build && npm version major",
     "release:quick": "npm test && npm run build && git add -A && git commit -m 'Quick release patch' && npm version patch",
-    "postversion": "git push && git push --tags && npm publish --access public",
+    "postversion": "git push && git push --tags && npm publish --access public --registry=https://registry.npmjs.org/",
     "pretest": "rimraf coverage",
     "test": "npm run lint && npm run build && jest --coverage"
   },
