@@ -16,7 +16,7 @@ export default class CdnManager {
             if (this.adapter === 'oss') {
                 this.ossUpload(key, uploadFile)
                     .then((res) => {
-                        console.log('uploadAdapter success');
+                        // console.log('uploadAdapter success');
                         resolve(res);
                     })
                     .catch((error) => {

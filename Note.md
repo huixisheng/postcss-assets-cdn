@@ -1,3 +1,5 @@
+yo postcss-plugin
+
 ```
     Root {
       raws: { semicolon: false, after: '' },

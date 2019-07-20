@@ -28,7 +28,7 @@ export default class Cache {
             try {
                 return JSON.parse(content);
             } catch (error) {
-                console.log('readCache', error);
+                console.error('readCache', error);
                 return result;
             }
         }
